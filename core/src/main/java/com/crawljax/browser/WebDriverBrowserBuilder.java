@@ -54,7 +54,7 @@ public class WebDriverBrowserBuilder implements Provider<EmbeddedBrowser> {
 		EmbeddedBrowser.BrowserType browserType = configuration.getBrowserConfig().getBrowsertype();
 		try {
 			switch (browserType) {
-				case FIREFOX:
+				/*case FIREFOX:
 					browser =
 					        newFireFoxBrowser(filterAttributes, crawlWaitReload, crawlWaitEvent);
 					break;
@@ -63,11 +63,11 @@ public class WebDriverBrowserBuilder implements Provider<EmbeddedBrowser> {
 					        WebDriverBackedEmbeddedBrowser.withDriver(
 					                new InternetExplorerDriver(),
 					                filterAttributes, crawlWaitEvent, crawlWaitReload);
-					break;
+					break;*/
 				case CHROME:
 					browser = newChromeBrowser(filterAttributes, crawlWaitReload, crawlWaitEvent);
 					break;
-				case REMOTE:
+				/*case REMOTE:
 					browser =
 					        WebDriverBackedEmbeddedBrowser.withRemoteDriver(configuration
 					                .getBrowserConfig().getRemoteHubUrl(), filterAttributes,
@@ -76,7 +76,7 @@ public class WebDriverBrowserBuilder implements Provider<EmbeddedBrowser> {
 				case PHANTOMJS:
 					browser =
 					        newPhantomJSDriver(filterAttributes, crawlWaitReload, crawlWaitEvent);
-					break;
+					break;*/
 				default:
 					throw new IllegalStateException("Unrecognized browsertype "
 					        + configuration.getBrowserConfig().getBrowsertype());
@@ -89,7 +89,7 @@ public class WebDriverBrowserBuilder implements Provider<EmbeddedBrowser> {
 		return browser;
 	}
 
-	private EmbeddedBrowser newFireFoxBrowser(ImmutableSortedSet<String> filterAttributes,
+	/*private EmbeddedBrowser newFireFoxBrowser(ImmutableSortedSet<String> filterAttributes,
 	        long crawlWaitReload, long crawlWaitEvent) {
 		if (configuration.getProxyConfiguration() != null) {
 			FirefoxProfile profile = new FirefoxProfile();
@@ -104,7 +104,7 @@ public class WebDriverBrowserBuilder implements Provider<EmbeddedBrowser> {
 			        .getProxyConfiguration().getPort());
 			profile.setPreference("network.proxy.type", configuration.getProxyConfiguration()
 			        .getType().toInt());
-			/* use proxy for everything, including localhost */
+			// use proxy for everything, including localhost
 			profile.setPreference("network.proxy.no_proxies_on", "");
 
 			return WebDriverBackedEmbeddedBrowser.withDriver(new FirefoxDriver(profile),
@@ -113,7 +113,7 @@ public class WebDriverBrowserBuilder implements Provider<EmbeddedBrowser> {
 
 		return WebDriverBackedEmbeddedBrowser.withDriver(new FirefoxDriver(), filterAttributes,
 		        crawlWaitEvent, crawlWaitReload);
-	}
+	}*/
 
 	private EmbeddedBrowser newChromeBrowser(ImmutableSortedSet<String> filterAttributes,
 	        long crawlWaitReload, long crawlWaitEvent) {
