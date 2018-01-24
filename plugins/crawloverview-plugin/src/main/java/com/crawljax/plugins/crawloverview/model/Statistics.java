@@ -5,6 +5,7 @@ import java.util.Date;
 
 import javax.annotation.concurrent.Immutable;
 
+import com.google.common.base.MoreObjects;
 import org.apache.commons.lang3.time.DurationFormatUtils;
 
 import com.crawljax.core.CrawlSession;
@@ -109,7 +110,7 @@ public class Statistics {
 
 	@Override
 	public String toString() {
-		return Objects.toStringHelper(this)
+		return MoreObjects.toStringHelper(this)
 		        .add("duration", duration)
 		        .add("failedEvents", failedEvents)
 		        .add("crawlPaths", crawlPaths)

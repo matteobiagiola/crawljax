@@ -2,6 +2,7 @@ package com.crawljax.condition;
 
 import javax.annotation.concurrent.ThreadSafe;
 
+import com.google.common.base.MoreObjects;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -81,7 +82,7 @@ public class ConditionTypeChecker<T extends ConditionType> {
 
 	@Override
 	public String toString() {
-		return Objects.toStringHelper(this)
+		return MoreObjects.toStringHelper(this)
 		        .add("invariants", invariants)
 		        .toString();
 	}

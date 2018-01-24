@@ -1,5 +1,6 @@
 package com.crawljax.core.configuration;
 
+import com.google.common.base.MoreObjects;
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.crawljax.condition.browserwaiter.WaitCondition;
@@ -107,7 +108,7 @@ public class PreCrawlConfiguration {
 
 	@Override
 	public String toString() {
-		return Objects.toStringHelper(this)
+		return MoreObjects.toStringHelper(this)
 		        .add("waitConditions", waitConditions)
 		        .add("crawlConditions", crawlConditions)
 		        .add("includedElements", includedElements)

@@ -5,6 +5,7 @@ import java.util.Map.Entry;
 
 import javax.annotation.concurrent.Immutable;
 
+import com.google.common.base.MoreObjects;
 import org.w3c.dom.Node;
 
 import com.crawljax.util.DomUtils;
@@ -136,7 +137,7 @@ public class Element implements Serializable {
 
 	@Override
 	public String toString() {
-		return Objects.toStringHelper(this)
+		return MoreObjects.toStringHelper(this)
 		        .add("node", node)
 		        .add("tag", tag)
 		        .add("text", text)

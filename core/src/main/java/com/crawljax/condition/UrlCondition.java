@@ -1,5 +1,6 @@
 package com.crawljax.condition;
 
+import com.google.common.base.MoreObjects;
 import net.jcip.annotations.Immutable;
 
 import com.crawljax.browser.EmbeddedBrowser;
@@ -44,7 +45,7 @@ public class UrlCondition implements Condition {
 
 	@Override
 	public String toString() {
-		return Objects.toStringHelper(this)
+		return MoreObjects.toStringHelper(this)
 		        .add("url", url)
 		        .toString();
 	}

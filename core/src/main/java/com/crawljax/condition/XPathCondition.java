@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import javax.xml.xpath.XPathExpressionException;
 
+import com.google.common.base.MoreObjects;
 import net.jcip.annotations.Immutable;
 
 import org.w3c.dom.Document;
@@ -66,7 +67,7 @@ public class XPathCondition implements Condition {
 
 	@Override
 	public String toString() {
-		return Objects.toStringHelper(this)
+		return MoreObjects.toStringHelper(this)
 		        .add("expression", expression)
 		        .toString();
 	}

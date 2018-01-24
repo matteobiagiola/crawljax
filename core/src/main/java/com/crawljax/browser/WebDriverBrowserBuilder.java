@@ -9,6 +9,7 @@ import com.crawljax.core.configuration.ProxyConfiguration.ProxyType;
 import com.crawljax.core.plugin.Plugins;
 import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableSortedSet;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -17,8 +18,12 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.phantomjs.PhantomJSDriver;
 import org.openqa.selenium.phantomjs.PhantomJSDriverService;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.net.MalformedURLException;
+import java.net.URL;
 
 /**
  * Default implementation of the EmbeddedBrowserBuilder based on Selenium WebDriver API.
@@ -66,6 +71,9 @@ public class WebDriverBrowserBuilder implements Provider<EmbeddedBrowser> {
 					break;*/
 				case CHROME:
 					browser = newChromeBrowser(filterAttributes, crawlWaitReload, crawlWaitEvent);
+					break;
+				case CHROME_HEADLESS:
+					browser = newChromeHeadlessBrowser(filterAttributes, crawlWaitReload, crawlWaitEvent);
 					break;
 				/*case REMOTE:
 					browser =
@@ -137,6 +145,17 @@ public class WebDriverBrowserBuilder implements Provider<EmbeddedBrowser> {
 		        crawlWaitEvent, crawlWaitReload);
 	}
 
+	private EmbeddedBrowser newChromeHeadlessBrowser(ImmutableSortedSet<String> filterAttributes,
+											 long crawlWaitReload, long crawlWaitEvent) {
+		ChromeOptions optionsChrome = new ChromeOptions();
+		//optionsChrome.setBinary(MyProperties.chromeBinary);
+		optionsChrome.addArguments("--headless", "--disable-gpu", "--window-size=1200x600");
+		ChromeDriver driverChrome = new ChromeDriver(optionsChrome);
+
+		return WebDriverBackedEmbeddedBrowser.withDriver(driverChrome, filterAttributes,
+				crawlWaitEvent, crawlWaitReload);
+	}
+
 	private EmbeddedBrowser newPhantomJSDriver(ImmutableSortedSet<String> filterAttributes,
 	        long crawlWaitReload, long crawlWaitEvent) {
 
@@ -158,5 +177,4 @@ public class WebDriverBrowserBuilder implements Provider<EmbeddedBrowser> {
 		return WebDriverBackedEmbeddedBrowser.withDriver(phantomJsDriver, filterAttributes,
 		        crawlWaitEvent, crawlWaitReload);
 	}
-
 }

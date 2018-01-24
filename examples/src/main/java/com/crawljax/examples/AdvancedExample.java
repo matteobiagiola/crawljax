@@ -20,7 +20,7 @@ public final class AdvancedExample {
 
 	private static final long WAIT_TIME_AFTER_EVENT = 200;
 	private static final long WAIT_TIME_AFTER_RELOAD = 20;
-	private static final String URL = "http://demo.crawljax.com";
+	private static final String URL = "http://localhost:3000";
 
 	/**
 	 * Run this method to start the crawl.
@@ -45,7 +45,7 @@ public final class AdvancedExample {
 		builder.crawlRules().waitAfterEvent(WAIT_TIME_AFTER_EVENT, TimeUnit.MILLISECONDS);
 
 		// We want to use two browsers simultaneously.
-		builder.setBrowserConfig(new BrowserConfiguration(BrowserType.FIREFOX, 1));
+		builder.setBrowserConfig(new BrowserConfiguration(BrowserType.CHROME, 1));
 
 		// CrawlOverview
 		builder.addPlugin(new CrawlOverview());

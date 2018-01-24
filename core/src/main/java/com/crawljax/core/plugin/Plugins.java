@@ -8,6 +8,7 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
+import com.google.common.base.MoreObjects;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -421,7 +422,7 @@ public class Plugins {
 
 	@Override
 	public String toString() {
-		return Objects.toStringHelper(this).add("plugins", plugins).toString();
+		return MoreObjects.toStringHelper(this).add("plugins", plugins).toString();
 	}
 
 	/**

@@ -7,6 +7,7 @@ import java.io.Serializable;
 import java.lang.reflect.Field;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+import com.google.common.base.MoreObjects;
 import org.jgrapht.graph.DefaultEdge;
 import org.w3c.dom.Node;
 
@@ -233,7 +234,7 @@ public class Eventable extends DefaultEdge implements Serializable {
 
 	@Override
 	public String toString() {
-		return Objects.toStringHelper(this)
+		return MoreObjects.toStringHelper(this)
 		        .add("eventType", eventType)
 		        .add("identification", identification)
 		        .add("element", element)

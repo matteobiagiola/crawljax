@@ -2,6 +2,7 @@ package com.crawljax.core;
 
 import java.util.List;
 
+import com.google.common.base.MoreObjects;
 import org.w3c.dom.Element;
 
 import com.crawljax.browser.EmbeddedBrowser;
@@ -154,7 +155,7 @@ public class CandidateElement {
 
 	@Override
 	public String toString() {
-		return Objects.toStringHelper(this)
+		return MoreObjects.toStringHelper(this)
 		        .add("identification", identification)
 		        .add("element", element)
 		        .add("formInputs", formInputs)
