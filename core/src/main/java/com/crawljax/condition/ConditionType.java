@@ -5,8 +5,7 @@ import java.util.List;
 
 import javax.annotation.concurrent.Immutable;
 
-import com.google.common.base.MoreObjects;
-import com.google.common.base.Objects;
+import com.crawljax.util.Objects;
 import com.google.common.collect.ImmutableList;
 
 /**
@@ -94,7 +93,7 @@ public abstract class ConditionType {
 
 	@Override
 	public String toString() {
-		return MoreObjects.toStringHelper(this)
+		return Objects.toStringHelper(this)
 		        .add("preConditions", preConditions)
 		        .add("description", description)
 		        .add("condition", condition)

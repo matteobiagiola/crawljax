@@ -3,11 +3,10 @@ package com.crawljax.plugins.crawloverview.model;
 import javax.annotation.concurrent.Immutable;
 
 import com.crawljax.core.state.StateVertex;
+import com.crawljax.util.Objects;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.google.common.base.MoreObjects;
-import com.google.common.base.Objects;
 import com.google.common.collect.ImmutableList;
 
 @Immutable
@@ -105,10 +104,16 @@ public class State {
 
 	@Override
 	public String toString() {
-		return MoreObjects.toStringHelper(this).add("name", name).add("id", id)
+		String result = Objects.toStringHelper(this).add("name", name).add("id", id)
+				.add("url", url).add("candidateElements", candidateElements)
+				.add("fanIn", fanIn).add("fanOut", fanOut)
+				.add("failedEvents", failedEvents).toString();
+		System.out.println("toStringHelper State: " + result);
+		return result;
+		/*return Objects.toStringHelper(this).add("name", name).add("id", id)
 		        .add("url", url).add("candidateElements", candidateElements)
 		        .add("fanIn", fanIn).add("fanOut", fanOut)
-		        .add("failedEvents", failedEvents).toString();
+		        .add("failedEvents", failedEvents).toString();*/
 	}
 
 }

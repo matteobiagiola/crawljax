@@ -2,12 +2,11 @@ package com.crawljax.condition;
 
 import javax.annotation.concurrent.ThreadSafe;
 
-import com.google.common.base.MoreObjects;
+import com.crawljax.util.Objects;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.crawljax.browser.EmbeddedBrowser;
-import com.google.common.base.Objects;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
 
@@ -82,7 +81,7 @@ public class ConditionTypeChecker<T extends ConditionType> {
 
 	@Override
 	public String toString() {
-		return MoreObjects.toStringHelper(this)
+		return Objects.toStringHelper(this)
 		        .add("invariants", invariants)
 		        .toString();
 	}

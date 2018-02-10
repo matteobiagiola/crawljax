@@ -14,8 +14,7 @@ import com.crawljax.core.configuration.PreCrawlConfiguration.PreCrawlConfigurati
 import com.crawljax.core.state.Eventable.EventType;
 import com.crawljax.oraclecomparator.OracleComparator;
 import com.crawljax.oraclecomparator.comparators.SimpleComparator;
-import com.google.common.base.MoreObjects;
-import com.google.common.base.Objects;
+import com.crawljax.util.Objects;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableList.Builder;
@@ -462,7 +461,7 @@ public class CrawlRules {
 
 	@Override
 	public String toString() {
-		return MoreObjects.toStringHelper(this)
+		return Objects.toStringHelper(this)
 		        .add("DEFAULT_WAIT_AFTER_RELOAD", DEFAULT_WAIT_AFTER_RELOAD)
 		        .add("DEFAULT_WAIT_AFTER_EVENT", DEFAULT_WAIT_AFTER_EVENT)
 		        .add("crawlEvents", crawlEvents)

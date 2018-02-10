@@ -5,9 +5,8 @@ import java.util.LinkedList;
 
 import com.crawljax.core.CandidateElement;
 import com.crawljax.util.DomUtils;
+import com.crawljax.util.Objects;
 import com.google.common.annotations.VisibleForTesting;
-import com.google.common.base.MoreObjects;
-import com.google.common.base.Objects;
 import com.google.common.collect.ImmutableList;
 import org.w3c.dom.Document;
 
@@ -97,7 +96,7 @@ public class StateVertexImpl implements StateVertex {
 
 	@Override
 	public String toString() {
-		return MoreObjects.toStringHelper(this)
+		return Objects.toStringHelper(this)
 		        .add("id", id)
 		        .add("name", name)
 		        .toString();

@@ -8,7 +8,7 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
-import com.google.common.base.MoreObjects;
+import com.crawljax.util.Objects;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -24,7 +24,6 @@ import com.crawljax.core.configuration.CrawljaxConfiguration;
 import com.crawljax.core.state.Eventable;
 import com.crawljax.core.state.StateVertex;
 import com.crawljax.metrics.MetricsModule;
-import com.google.common.base.Objects;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableListMultimap;
@@ -422,7 +421,7 @@ public class Plugins {
 
 	@Override
 	public String toString() {
-		return MoreObjects.toStringHelper(this).add("plugins", plugins).toString();
+		return Objects.toStringHelper(this).add("plugins", plugins).toString();
 	}
 
 	/**

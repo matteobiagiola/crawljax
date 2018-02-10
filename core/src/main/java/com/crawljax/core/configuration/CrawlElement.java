@@ -6,8 +6,7 @@ import java.util.List;
 import com.crawljax.condition.Condition;
 import com.crawljax.condition.eventablecondition.EventableCondition;
 import com.crawljax.core.state.Eventable.EventType;
-import com.google.common.base.MoreObjects;
-import com.google.common.base.Objects;
+import com.crawljax.util.Objects;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 
@@ -170,7 +169,7 @@ public final class CrawlElement {
 
 	@Override
 	public String toString() {
-		return MoreObjects.toStringHelper(this).add("tagName", tagName)
+		return Objects.toStringHelper(this).add("tagName", tagName)
 				.add("conditions", conditions).add("id", id)
 				.add("eventType", eventType)
 				.add("inputFieldIds", inputFieldIds)

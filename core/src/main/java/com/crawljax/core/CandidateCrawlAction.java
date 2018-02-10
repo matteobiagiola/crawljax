@@ -1,8 +1,8 @@
 package com.crawljax.core;
 
 import com.crawljax.core.state.Eventable.EventType;
+import com.crawljax.util.Objects;
 import com.google.common.base.MoreObjects;
-import com.google.common.base.Objects;
 
 /**
  * This class corresponds the combination of a CandidateElement and a single
@@ -45,7 +45,7 @@ public class CandidateCrawlAction {
 
 	@Override
 	public String toString() {
-		return MoreObjects.toStringHelper(this)
+		return Objects.toStringHelper(this)
 				.add("candidateElement", candidateElement)
 				.add("eventType", eventType).toString();
 	}

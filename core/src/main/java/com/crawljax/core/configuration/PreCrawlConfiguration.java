@@ -1,11 +1,10 @@
 package com.crawljax.core.configuration;
 
-import com.google.common.base.MoreObjects;
+import com.crawljax.util.Objects;
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.crawljax.condition.browserwaiter.WaitCondition;
 import com.crawljax.condition.crawlcondition.CrawlCondition;
-import com.google.common.base.Objects;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSortedSet;
 
@@ -108,7 +107,7 @@ public class PreCrawlConfiguration {
 
 	@Override
 	public String toString() {
-		return MoreObjects.toStringHelper(this)
+		return Objects.toStringHelper(this)
 		        .add("waitConditions", waitConditions)
 		        .add("crawlConditions", crawlConditions)
 		        .add("includedElements", includedElements)

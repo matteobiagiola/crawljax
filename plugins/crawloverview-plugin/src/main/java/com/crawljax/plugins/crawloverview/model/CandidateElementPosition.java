@@ -2,14 +2,13 @@ package com.crawljax.plugins.crawloverview.model;
 
 import javax.annotation.concurrent.Immutable;
 
-import com.google.common.base.MoreObjects;
+import com.crawljax.util.Objects;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.Point;
 
 import com.crawljax.core.CandidateElement;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.google.common.base.Objects;
 
 /**
  * Position of a candidate element of a state. This type is used to build the overlays of screenshot
@@ -78,7 +77,7 @@ public class CandidateElementPosition {
 
 	@Override
 	public String toString() {
-		return MoreObjects.toStringHelper(this)
+		return Objects.toStringHelper(this)
 		        .add("top", top)
 		        .add("left", left)
 		        .add("xpath", xpath)

@@ -1,10 +1,9 @@
 package com.crawljax.condition;
 
-import com.google.common.base.MoreObjects;
+import com.crawljax.util.Objects;
 import net.jcip.annotations.Immutable;
 
 import com.crawljax.browser.EmbeddedBrowser;
-import com.google.common.base.Objects;
 
 /**
  * A condition which returns true iff the expression does NOT occur in the DOM.
@@ -45,7 +44,7 @@ public class NotRegexCondition implements Condition {
 
 	@Override
 	public String toString() {
-		return MoreObjects.toStringHelper(this)
+		return Objects.toStringHelper(this)
 		        .add("regexCondition", regexCondition)
 		        .toString();
 	}

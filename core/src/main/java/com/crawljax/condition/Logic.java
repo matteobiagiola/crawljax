@@ -2,11 +2,10 @@ package com.crawljax.condition;
 
 import java.util.Arrays;
 
-import com.google.common.base.MoreObjects;
+import com.crawljax.util.Objects;
 import net.jcip.annotations.Immutable;
 
 import com.crawljax.browser.EmbeddedBrowser;
-import com.google.common.base.Objects;
 
 /**
  * Logic operations for conditions.
@@ -67,7 +66,7 @@ public final class Logic {
 
 		@Override
 		public String toString() {
-			return MoreObjects.toStringHelper(this)
+			return Objects.toStringHelper(this)
 			        .add("condition", condition)
 			        .toString();
 		}
@@ -106,7 +105,7 @@ public final class Logic {
 
 		@Override
 		public String toString() {
-			return MoreObjects.toStringHelper(this)
+			return Objects.toStringHelper(this)
 			        .add("condition", Arrays.deepToString(conditions))
 			        .toString();
 		}
@@ -146,7 +145,7 @@ public final class Logic {
 
 		@Override
 		public String toString() {
-			return MoreObjects.toStringHelper(this)
+			return Objects.toStringHelper(this)
 			        .add("condition", Arrays.deepToString(conditions))
 			        .toString();
 		}

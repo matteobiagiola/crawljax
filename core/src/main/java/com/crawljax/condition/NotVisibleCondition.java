@@ -1,11 +1,10 @@
 package com.crawljax.condition;
 
-import com.google.common.base.MoreObjects;
+import com.crawljax.util.Objects;
 import net.jcip.annotations.Immutable;
 
 import com.crawljax.browser.EmbeddedBrowser;
 import com.crawljax.core.state.Identification;
-import com.google.common.base.Objects;
 
 /**
  * Conditions that returns true iff element found with By is visible.
@@ -46,7 +45,7 @@ public class NotVisibleCondition implements Condition {
 
 	@Override
 	public String toString() {
-		return MoreObjects.toStringHelper(this)
+		return Objects.toStringHelper(this)
 		        .add("visibleCondition", visibleCondition)
 		        .toString();
 	}

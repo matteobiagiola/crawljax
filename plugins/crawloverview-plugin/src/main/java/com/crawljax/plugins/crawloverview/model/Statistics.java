@@ -5,14 +5,13 @@ import java.util.Date;
 
 import javax.annotation.concurrent.Immutable;
 
-import com.google.common.base.MoreObjects;
+import com.crawljax.util.Objects;
 import org.apache.commons.lang3.time.DurationFormatUtils;
 
 import com.crawljax.core.CrawlSession;
 import com.crawljax.core.state.StateFlowGraph;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.google.common.base.Objects;
 
 @Immutable
 public class Statistics {
@@ -110,7 +109,7 @@ public class Statistics {
 
 	@Override
 	public String toString() {
-		return MoreObjects.toStringHelper(this)
+		return Objects.toStringHelper(this)
 		        .add("duration", duration)
 		        .add("failedEvents", failedEvents)
 		        .add("crawlPaths", crawlPaths)

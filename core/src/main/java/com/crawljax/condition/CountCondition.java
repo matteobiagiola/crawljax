@@ -2,11 +2,10 @@ package com.crawljax.condition;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
-import com.google.common.base.MoreObjects;
+import com.crawljax.util.Objects;
 import net.jcip.annotations.ThreadSafe;
 
 import com.crawljax.browser.EmbeddedBrowser;
-import com.google.common.base.Objects;
 
 /**
  * Condition that counts how many times a condition is specified and returns true iff the specified
@@ -46,7 +45,7 @@ public class CountCondition implements Condition {
 
 	@Override
 	public String toString() {
-		return MoreObjects.toStringHelper(this)
+		return Objects.toStringHelper(this)
 		        .add("condition", condition)
 		        .add("maxCount", maxCount)
 		        .toString();

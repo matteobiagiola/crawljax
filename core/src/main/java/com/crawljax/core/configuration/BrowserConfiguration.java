@@ -8,8 +8,7 @@ import javax.inject.Provider;
 import com.crawljax.browser.EmbeddedBrowser;
 import com.crawljax.browser.EmbeddedBrowser.BrowserType;
 import com.crawljax.browser.WebDriverBrowserBuilder;
-import com.google.common.base.MoreObjects;
-import com.google.common.base.Objects;
+import com.crawljax.util.Objects;
 import com.google.common.base.Preconditions;
 
 @Immutable
@@ -125,7 +124,7 @@ public class BrowserConfiguration {
 
 	@Override
 	public String toString() {
-		return MoreObjects.toStringHelper(this)
+		return Objects.toStringHelper(this)
 		        .add("browsertype", browsertype)
 		        .add("numberOfBrowsers", numberOfBrowsers)
 		        .add("browserBuilder", browserBuilder)

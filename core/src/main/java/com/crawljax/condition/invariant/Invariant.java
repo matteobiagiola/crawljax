@@ -4,8 +4,7 @@ import java.util.List;
 
 import com.crawljax.condition.Condition;
 import com.crawljax.condition.ConditionType;
-import com.google.common.base.MoreObjects;
-import com.google.common.base.Objects;
+import com.crawljax.util.Objects;
 
 /**
  * An Invariant is an condition which should always hold when its preconditions are satisfied.
@@ -56,7 +55,7 @@ public class Invariant extends ConditionType {
 
 	@Override
 	public String toString() {
-		return MoreObjects.toStringHelper(this)
+		return Objects.toStringHelper(this)
 		        .add("description", getDescription())
 		        .add("condition", getInvariantCondition())
 		        .toString();

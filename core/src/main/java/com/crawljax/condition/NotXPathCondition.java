@@ -1,10 +1,9 @@
 package com.crawljax.condition;
 
-import com.google.common.base.MoreObjects;
+import com.crawljax.util.Objects;
 import net.jcip.annotations.Immutable;
 
 import com.crawljax.browser.EmbeddedBrowser;
-import com.google.common.base.Objects;
 
 /**
  * Condition that returns true iff no elements are found with expression.
@@ -45,7 +44,7 @@ public class NotXPathCondition implements Condition {
 
 	@Override
 	public String toString() {
-		return MoreObjects.toStringHelper(this)
+		return Objects.toStringHelper(this)
 		        .add("xpathCondition", xpathCondition)
 		        .toString();
 	}

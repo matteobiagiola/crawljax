@@ -1,11 +1,10 @@
 package com.crawljax.condition;
 
-import com.google.common.base.MoreObjects;
+import com.crawljax.util.Objects;
 import net.jcip.annotations.Immutable;
 
 import com.crawljax.browser.EmbeddedBrowser;
 import com.crawljax.core.CrawljaxException;
-import com.google.common.base.Objects;
 
 /**
  * A condition in the form of a JavaScript expression which returns true if the expression return
@@ -67,7 +66,7 @@ public class JavaScriptCondition implements Condition {
 
 	@Override
 	public String toString() {
-		return MoreObjects.toStringHelper(this)
+		return Objects.toStringHelper(this)
 		        .add("expression", expression)
 		        .toString();
 	}

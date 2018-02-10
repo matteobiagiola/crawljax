@@ -5,11 +5,10 @@ import java.util.Map.Entry;
 
 import javax.annotation.concurrent.Immutable;
 
-import com.google.common.base.MoreObjects;
+import com.crawljax.util.Objects;
 import org.w3c.dom.Node;
 
 import com.crawljax.util.DomUtils;
-import com.google.common.base.Objects;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableMap.Builder;
@@ -137,12 +136,20 @@ public class Element implements Serializable {
 
 	@Override
 	public String toString() {
-		return MoreObjects.toStringHelper(this)
+		String result = Objects.toStringHelper(this)
+				.add("node", node)
+				.add("tag", tag)
+				.add("text", text)
+				.add("attributes", attributes)
+				.toString();
+		System.out.println("toStringHelper ELEMENT: " + result);
+		return result;
+		/*return Objects.toStringHelper(this)
 		        .add("node", node)
 		        .add("tag", tag)
 		        .add("text", text)
 		        .add("attributes", attributes)
-		        .toString();
+		        .toString();*/
 	}
 
 	@Override

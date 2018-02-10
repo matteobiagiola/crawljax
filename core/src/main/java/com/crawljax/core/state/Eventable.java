@@ -7,7 +7,7 @@ import java.io.Serializable;
 import java.lang.reflect.Field;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-import com.google.common.base.MoreObjects;
+import com.crawljax.util.Objects;
 import org.jgrapht.graph.DefaultEdge;
 import org.w3c.dom.Node;
 
@@ -16,7 +16,6 @@ import com.crawljax.core.CrawljaxException;
 import com.crawljax.forms.FormInput;
 import com.crawljax.util.XPathHelper;
 import com.google.common.annotations.VisibleForTesting;
-import com.google.common.base.Objects;
 
 /**
  * Eventable class: an element having an event attached to it (onclick, onmouseover, ...) so that it
@@ -234,7 +233,7 @@ public class Eventable extends DefaultEdge implements Serializable {
 
 	@Override
 	public String toString() {
-		return MoreObjects.toStringHelper(this)
+		return Objects.toStringHelper(this)
 		        .add("eventType", eventType)
 		        .add("identification", identification)
 		        .add("element", element)

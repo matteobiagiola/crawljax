@@ -2,14 +2,13 @@ package com.crawljax.condition;
 
 import java.util.regex.Pattern;
 
-import com.google.common.base.MoreObjects;
+import com.crawljax.util.Objects;
 import net.jcip.annotations.Immutable;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.crawljax.browser.EmbeddedBrowser;
-import com.google.common.base.Objects;
 
 /**
  * Condition that returns true iff experssion occurs in the dom.
@@ -57,7 +56,7 @@ public class RegexCondition implements Condition {
 
 	@Override
 	public String toString() {
-		return MoreObjects.toStringHelper(this)
+		return Objects.toStringHelper(this)
 		        .add("expression", expression.toString())
 		        .add("pattern", pattern.toString())
 		        .toString();
