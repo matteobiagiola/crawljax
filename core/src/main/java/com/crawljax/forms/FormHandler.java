@@ -118,6 +118,7 @@ public class FormHandler {
             return;
         }
         WebElement inputElement = browser.getWebElement(input.getIdentification());
+        inputElement.clear(); // added
         inputElement.sendKeys(text);
     }
 
