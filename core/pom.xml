@@ -68,34 +68,42 @@
 			<version>1.0</version>
 		</dependency>
 
+
+
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-firefox-driver</artifactId>
-			<version>${selenium.version}</version>
+			<version>3.3.1</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-chrome-driver</artifactId>
-			<version>${selenium.version}</version>
+			<version>3.3.1</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-ie-driver</artifactId>
-			<version>${selenium.version}</version>
+			<version>3.3.1</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-support</artifactId>
-			<version>${selenium.version}</version>
+			<version>3.3.1</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-remote-driver</artifactId>
-			<version>${selenium.version}</version>
+			<version>3.3.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-java</artifactId>
+			<version>3.3.1</version>
 		</dependency>
 
 		<dependency>

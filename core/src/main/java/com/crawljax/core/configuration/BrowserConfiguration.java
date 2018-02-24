@@ -44,6 +44,7 @@ public class BrowserConfiguration {
 	private final int numberOfBrowsers;
 	private final Provider<EmbeddedBrowser> browserBuilder;
 	private String remoteHubUrl;
+	private String sessionFileName;
 	private String lang;
 
 	/**
@@ -57,6 +58,14 @@ public class BrowserConfiguration {
 		BrowserConfiguration config =
 		        new BrowserConfiguration(BrowserType.REMOTE, numberOfBrowsers);
 		config.remoteHubUrl = remoteUrl;
+		return config;
+	}
+
+	public static BrowserConfiguration remoteConfig(int numberOfBrowsers, BrowserType type, String remoteUrl, String sessionFileName) {
+		BrowserConfiguration config =
+				new BrowserConfiguration(type, numberOfBrowsers);
+		config.remoteHubUrl = remoteUrl;
+		config.sessionFileName = sessionFileName;
 		return config;
 	}
 
@@ -118,6 +127,10 @@ public class BrowserConfiguration {
 		return remoteHubUrl;
 	}
 
+	public String getSessionFileName() {
+		return sessionFileName;
+	}
+
 	public boolean isDefaultBuilder() {
 		return browserBuilder.equals(DEFAULT_BROWSER_BUILDER);
 	}
@@ -130,6 +143,7 @@ public class BrowserConfiguration {
 		        .add("browserBuilder", browserBuilder)
 		        .add("remoteHubUrl", remoteHubUrl)
 		        .add("language", lang)
+				.add("sessionFileName", sessionFileName)
 		        .toString();
 	}
 

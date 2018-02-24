@@ -95,12 +95,12 @@
             <dependency>
                 <groupId>org.seleniumhq.selenium</groupId>
                 <artifactId>selenium-server</artifactId>
-                <version>${selenium.version}</version>
+                <version>3.3.1</version>
             </dependency>
             <dependency>
                 <groupId>org.seleniumhq.selenium</groupId>
                 <artifactId>selenium-java</artifactId>
-                <version>${selenium.version}</version>
+                <version>3.3.1</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

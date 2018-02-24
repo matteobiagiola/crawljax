@@ -142,7 +142,6 @@ public class Element implements Serializable {
 				.add("text", text)
 				.add("attributes", attributes)
 				.toString();
-		System.out.println("toStringHelper ELEMENT: " + result);
 		return result;
 		/*return Objects.toStringHelper(this)
 		        .add("node", node)

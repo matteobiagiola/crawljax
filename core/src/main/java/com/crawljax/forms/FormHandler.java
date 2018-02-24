@@ -8,6 +8,7 @@ import com.crawljax.core.exception.BrowserConnectionException;
 import com.crawljax.util.DomUtils;
 import com.crawljax.util.XPathHelper;
 import com.google.inject.assistedinject.Assisted;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -120,6 +121,7 @@ public class FormHandler {
         WebElement inputElement = browser.getWebElement(input.getIdentification());
         inputElement.clear(); // added
         inputElement.sendKeys(text);
+        inputElement.sendKeys(Keys.RETURN);
     }
 
 	/**

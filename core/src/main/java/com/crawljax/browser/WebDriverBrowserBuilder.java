@@ -75,6 +75,12 @@ public class WebDriverBrowserBuilder implements Provider<EmbeddedBrowser> {
 				case CHROME_HEADLESS:
 					browser = newChromeHeadlessBrowser(filterAttributes, crawlWaitReload, crawlWaitEvent);
 					break;
+				case REMOTE:
+					browser = newRemoteDriver(filterAttributes, crawlWaitReload, crawlWaitEvent);
+					break;
+				case REMOTE_HEADLESS:
+					//browser = newRemoteHeadlessDriver(filterAttributes, crawlWaitReload, crawlWaitEvent);
+					break;
 				/*case REMOTE:
 					browser =
 					        WebDriverBackedEmbeddedBrowser.withRemoteDriver(configuration
@@ -144,6 +150,66 @@ public class WebDriverBrowserBuilder implements Provider<EmbeddedBrowser> {
 		return WebDriverBackedEmbeddedBrowser.withDriver(driverChrome, filterAttributes,
 		        crawlWaitEvent, crawlWaitReload);
 	}
+
+	private EmbeddedBrowser newRemoteDriver(ImmutableSortedSet<String> filterAttributes,
+											 long crawlWaitReload, long crawlWaitEvent) {
+		try{
+			WebDriver driver;
+			if (configuration.getProxyConfiguration() != null
+					&& configuration.getProxyConfiguration().getType() != ProxyType.NOTHING) {
+				DesiredCapabilities capabilities = new DesiredCapabilities();
+				ChromeOptions optionsChrome = new ChromeOptions();
+				String lang = configuration.getBrowserConfig().getLangOrNull();
+				if (!Strings.isNullOrEmpty(lang)) {
+					optionsChrome.addArguments("--lang=" + lang);
+				}
+				optionsChrome.addArguments("--proxy-server=http://"
+						+ configuration.getProxyConfiguration().getHostname() + ":"
+						+ configuration.getProxyConfiguration().getPort());
+				optionsChrome.addArguments("--headless", "--disable-gpu", "--window-size=1200x600");
+				capabilities.setCapability(ChromeOptions.CAPABILITY, optionsChrome);
+				URL url = new URL(configuration.getBrowserConfig().getRemoteHubUrl());
+				driver = new RemoteWebDriver(url, capabilities, true, configuration.getBrowserConfig().getSessionFileName());
+			} else {
+				DesiredCapabilities capabilities = new DesiredCapabilities();
+				ChromeOptions optionsChrome = new ChromeOptions();
+				optionsChrome.addArguments("--headless", "--disable-gpu", "--window-size=1200x600");
+				capabilities.setCapability(ChromeOptions.CAPABILITY, optionsChrome);
+				URL url = new URL(configuration.getBrowserConfig().getRemoteHubUrl());
+				driver = new RemoteWebDriver(url, capabilities, true, configuration.getBrowserConfig().getSessionFileName());
+			}
+
+			return WebDriverBackedEmbeddedBrowser.withDriver(driver, filterAttributes,
+					crawlWaitEvent, crawlWaitReload);
+		}catch (MalformedURLException e){
+			e.printStackTrace();
+		}
+		throw new IllegalStateException("MalformedURL");
+	}
+
+	/*private EmbeddedBrowser newRemoteHeadlessDriver(ImmutableSortedSet<String> filterAttributes,
+											long crawlWaitReload, long crawlWaitEvent) {
+		WebDriver driver;
+		if (configuration.getProxyConfiguration() != null
+				&& configuration.getProxyConfiguration().getType() != ProxyType.NOTHING) {
+			ChromeOptions optionsChrome = new ChromeOptions();
+			String lang = configuration.getBrowserConfig().getLangOrNull();
+			if (!Strings.isNullOrEmpty(lang)) {
+				optionsChrome.addArguments("--lang=" + lang);
+			}
+			optionsChrome.addArguments("--proxy-server=http://"
+					+ configuration.getProxyConfiguration().getHostname() + ":"
+					+ configuration.getProxyConfiguration().getPort());
+			driverChrome = new ChromeDriver(optionsChrome);
+		} else {
+			driverChrome = new ChromeDriver();
+		}
+
+		return WebDriverBackedEmbeddedBrowser.withDriver(driverChrome, filterAttributes,
+				crawlWaitEvent, crawlWaitReload);
+	}*/
+
+
 
 	private EmbeddedBrowser newChromeHeadlessBrowser(ImmutableSortedSet<String> filterAttributes,
 											 long crawlWaitReload, long crawlWaitEvent) {
