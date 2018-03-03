@@ -5,10 +5,14 @@ import javax.annotation.concurrent.Immutable;
 import com.crawljax.core.CrawljaxException;
 import com.crawljax.core.state.Element;
 import com.crawljax.core.state.Eventable;
+import com.crawljax.forms.FormInput;
 import com.crawljax.plugins.crawloverview.CrawlOverviewException;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.Objects;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * An {@link Edge} between two {@link State}s.
@@ -23,6 +27,7 @@ public class Edge {
 	private final String id;
 	private final String element;
 	private final String eventType;
+	private final String inputValues;
 
 	public Edge(Eventable eventable) {
 		try {
@@ -41,13 +46,29 @@ public class Edge {
 			element = eventable.getElement().toString();
 		}
 		eventType = eventable.getEventType().toString();
+		//build input values string
+		if(eventable.getRelatedFormInputs().size() > 0){
+			StringBuilder inputBuilder = new StringBuilder();
+			for (int i = 0; i < eventable.getRelatedFormInputs().size(); i++) {
+				FormInput formInput = eventable.getRelatedFormInputs().get(i);
+				String formInputValues = formInput.getInputValues().stream().map(inputValue -> inputValue.getValue()).collect(Collectors.joining(","));
+				String howInputValues = formInput.getIdentification().getHow().name();
+				String idInputValues = formInput.getIdentification().getValue();
+				if(i != eventable.getRelatedFormInputs().size() - 1) inputBuilder.append(howInputValues + "##" + idInputValues + "##" + formInputValues + ":");
+				else inputBuilder.append(howInputValues + "##" + idInputValues + "##" + formInputValues);
+			}
+			this.inputValues = inputBuilder.toString();
+		}else{
+			this.inputValues = "none";
+		}
 	}
 
 	@JsonCreator
 	public Edge(@JsonProperty("from") String from, @JsonProperty("to") String to,
 	        @JsonProperty("hash") int hash, @JsonProperty("text") String text,
 	        @JsonProperty("id") String id, @JsonProperty("element") String element,
-	        @JsonProperty("eventType") String eventType) {
+	        @JsonProperty("eventType") String eventType,
+			@JsonProperty("inputValues") String inputValues) {
 		this.from = from;
 		this.to = to;
 		this.hash = hash;
@@ -55,13 +76,14 @@ public class Edge {
 		this.id = id;
 		this.element = element;
 		this.eventType = eventType;
+		this.inputValues = inputValues;
 	}
 
 	/**
 	 * @return The pre-computed hashcode.
 	 */
 	private final int buildHash() {
-		return Objects.hashCode(from, to, text, id, element, eventType);
+		return Objects.hashCode(from, to, text, id, element, eventType, inputValues);
 	}
 
 	public String getFrom() {
@@ -89,6 +111,10 @@ public class Edge {
 		return eventType;
 	}
 
+	public String getInputValues() {
+		return inputValues;
+	}
+
 	public String getElement() {
 		return element;
 	}
@@ -107,7 +133,8 @@ public class Edge {
 			        && Objects.equal(this.text, that.text)
 			        && Objects.equal(this.id, that.id)
 			        && Objects.equal(this.element, that.element)
-			        && Objects.equal(this.eventType, that.eventType);
+			        && Objects.equal(this.eventType, that.eventType)
+					&& Objects.equal(this.inputValues, that.inputValues);
 		}
 		return false;
 	}
