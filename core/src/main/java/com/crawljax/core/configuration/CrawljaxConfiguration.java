@@ -12,6 +12,7 @@ import com.crawljax.browser.EmbeddedBrowser.BrowserType;
 import com.crawljax.core.Crawler;
 import com.crawljax.core.CrawljaxException;
 import com.crawljax.core.configuration.CrawlRules.CrawlRulesBuilder;
+import com.crawljax.core.configuration.applications.ApplicationNames;
 import com.crawljax.core.plugin.Plugin;
 import com.crawljax.core.state.StateVertexFactory;
 import com.crawljax.util.Objects;
@@ -192,6 +193,11 @@ public class CrawljaxConfiguration {
 			return this;
 		}
 
+		public CrawljaxConfigurationBuilder setApplicationName(ApplicationNames applicationName){
+			config.applicationName = applicationName;
+			return this;
+		}
+
 		private void checkOutputDirWritable() {
 			if (!config.output.exists()) {
 				Preconditions.checkState(config.output.mkdirs(),
@@ -247,6 +253,8 @@ public class CrawljaxConfiguration {
 
 	private StateVertexFactory stateVertexFactory;
 
+	private ApplicationNames applicationName = ApplicationNames.NONE;
+
 	private CrawljaxConfiguration() {
 	}
 
@@ -292,6 +300,10 @@ public class CrawljaxConfiguration {
 
 	public StateVertexFactory getStateVertexFactory() {
 		return stateVertexFactory;
+	}
+
+	public ApplicationNames getApplicationName() {
+		return applicationName;
 	}
 
 	@Override

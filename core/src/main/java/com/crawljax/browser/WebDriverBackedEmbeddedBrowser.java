@@ -26,6 +26,7 @@ import com.crawljax.util.DomUtils;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableSortedSet;
 import com.google.common.io.Files;
+import org.openqa.selenium.By;
 import org.openqa.selenium.ElementNotVisibleException;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
@@ -781,6 +782,15 @@ public final class WebDriverBackedEmbeddedBrowser implements EmbeddedBrowser {
 	public WebElement getWebElement(Identification identification) {
 		try {
 			return browser.findElement(identification.getWebDriverBy());
+		} catch (WebDriverException e) {
+			throw wrapWebDriverExceptionIfConnectionException(e);
+		}
+	}
+
+	@Override
+	public WebElement getWebElement(By location) {
+		try{
+			return browser.findElement(location);
 		} catch (WebDriverException e) {
 			throw wrapWebDriverExceptionIfConnectionException(e);
 		}

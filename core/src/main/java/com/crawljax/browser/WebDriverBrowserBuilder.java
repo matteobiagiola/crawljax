@@ -55,20 +55,10 @@ public class WebDriverBrowserBuilder implements Provider<EmbeddedBrowser> {
 		long crawlWaitEvent = configuration.getCrawlRules().getWaitAfterEvent();
 
 		// Determine the requested browser type
-		EmbeddedBrowser browser = null;
+		EmbeddedBrowser browser;
 		EmbeddedBrowser.BrowserType browserType = configuration.getBrowserConfig().getBrowsertype();
 		try {
 			switch (browserType) {
-				/*case FIREFOX:
-					browser =
-					        newFireFoxBrowser(filterAttributes, crawlWaitReload, crawlWaitEvent);
-					break;
-				case INTERNET_EXPLORER:
-					browser =
-					        WebDriverBackedEmbeddedBrowser.withDriver(
-					                new InternetExplorerDriver(),
-					                filterAttributes, crawlWaitEvent, crawlWaitReload);
-					break;*/
 				case CHROME:
 					browser = newChromeBrowser(filterAttributes, crawlWaitReload, crawlWaitEvent);
 					break;
@@ -81,16 +71,6 @@ public class WebDriverBrowserBuilder implements Provider<EmbeddedBrowser> {
 				case REMOTE_HEADLESS:
 					browser = newRemoteHeadlessDriver(filterAttributes, crawlWaitReload, crawlWaitEvent);
 					break;
-				/*case REMOTE:
-					browser =
-					        WebDriverBackedEmbeddedBrowser.withRemoteDriver(configuration
-					                .getBrowserConfig().getRemoteHubUrl(), filterAttributes,
-					                crawlWaitEvent, crawlWaitReload);
-					break;
-				case PHANTOMJS:
-					browser =
-					        newPhantomJSDriver(filterAttributes, crawlWaitReload, crawlWaitEvent);
-					break;*/
 				default:
 					throw new IllegalStateException("Unrecognized browsertype "
 					        + configuration.getBrowserConfig().getBrowsertype());
@@ -102,32 +82,6 @@ public class WebDriverBrowserBuilder implements Provider<EmbeddedBrowser> {
 		plugins.runOnBrowserCreatedPlugins(browser);
 		return browser;
 	}
-
-	/*private EmbeddedBrowser newFireFoxBrowser(ImmutableSortedSet<String> filterAttributes,
-	        long crawlWaitReload, long crawlWaitEvent) {
-		if (configuration.getProxyConfiguration() != null) {
-			FirefoxProfile profile = new FirefoxProfile();
-			String lang = configuration.getBrowserConfig().getLangOrNull();
-			if (!Strings.isNullOrEmpty(lang)) {
-				profile.setPreference("intl.accept_languages", lang);
-			}
-
-			profile.setPreference("network.proxy.http", configuration.getProxyConfiguration()
-			        .getHostname());
-			profile.setPreference("network.proxy.http_port", configuration
-			        .getProxyConfiguration().getPort());
-			profile.setPreference("network.proxy.type", configuration.getProxyConfiguration()
-			        .getType().toInt());
-			// use proxy for everything, including localhost
-			profile.setPreference("network.proxy.no_proxies_on", "");
-
-			return WebDriverBackedEmbeddedBrowser.withDriver(new FirefoxDriver(profile),
-			        filterAttributes, crawlWaitReload, crawlWaitEvent);
-		}
-
-		return WebDriverBackedEmbeddedBrowser.withDriver(new FirefoxDriver(), filterAttributes,
-		        crawlWaitEvent, crawlWaitReload);
-	}*/
 
 	private EmbeddedBrowser newChromeBrowser(ImmutableSortedSet<String> filterAttributes,
 	        long crawlWaitReload, long crawlWaitEvent) {
@@ -168,13 +122,13 @@ public class WebDriverBrowserBuilder implements Provider<EmbeddedBrowser> {
 						+ configuration.getProxyConfiguration().getPort());
 				capabilities.setCapability(ChromeOptions.CAPABILITY, optionsChrome);
 				URL url = new URL(configuration.getBrowserConfig().getRemoteHubUrl());
-				driver = new RemoteWebDriver(url, capabilities, true, configuration.getBrowserConfig().getSessionFileName());
+				driver = new RemoteWebDriver(url, capabilities);
 			} else {
 				DesiredCapabilities capabilities = new DesiredCapabilities();
 				ChromeOptions optionsChrome = new ChromeOptions();
 				capabilities.setCapability(ChromeOptions.CAPABILITY, optionsChrome);
 				URL url = new URL(configuration.getBrowserConfig().getRemoteHubUrl());
-				driver = new RemoteWebDriver(url, capabilities, true, configuration.getBrowserConfig().getSessionFileName());
+				driver = new RemoteWebDriver(url, capabilities);
 			}
 
 			return WebDriverBackedEmbeddedBrowser.withDriver(driver, filterAttributes,
@@ -203,14 +157,14 @@ public class WebDriverBrowserBuilder implements Provider<EmbeddedBrowser> {
 				optionsChrome.addArguments("--headless", "--disable-gpu", "--window-size=1200x600");
 				capabilities.setCapability(ChromeOptions.CAPABILITY, optionsChrome);
 				URL url = new URL(configuration.getBrowserConfig().getRemoteHubUrl());
-				driver = new RemoteWebDriver(url, capabilities, true, configuration.getBrowserConfig().getSessionFileName());
+				driver = new RemoteWebDriver(url, capabilities);
 			} else {
 				DesiredCapabilities capabilities = new DesiredCapabilities();
 				ChromeOptions optionsChrome = new ChromeOptions();
 				optionsChrome.addArguments("--headless", "--disable-gpu", "--window-size=1200x600");
 				capabilities.setCapability(ChromeOptions.CAPABILITY, optionsChrome);
 				URL url = new URL(configuration.getBrowserConfig().getRemoteHubUrl());
-				driver = new RemoteWebDriver(url, capabilities, true, configuration.getBrowserConfig().getSessionFileName());
+				driver = new RemoteWebDriver(url, capabilities);
 			}
 
 			return WebDriverBackedEmbeddedBrowser.withDriver(driver, filterAttributes,
@@ -226,7 +180,6 @@ public class WebDriverBrowserBuilder implements Provider<EmbeddedBrowser> {
 	private EmbeddedBrowser newChromeHeadlessBrowser(ImmutableSortedSet<String> filterAttributes,
 											 long crawlWaitReload, long crawlWaitEvent) {
 		ChromeOptions optionsChrome = new ChromeOptions();
-		//optionsChrome.setBinary(MyProperties.chromeBinary);
 		optionsChrome.addArguments("--headless", "--disable-gpu", "--window-size=1200x600");
 		ChromeDriver driverChrome = new ChromeDriver(optionsChrome);
 

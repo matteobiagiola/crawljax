@@ -11,6 +11,8 @@ import java.util.regex.Pattern;
 import javax.inject.Inject;
 import javax.inject.Provider;
 
+import com.crawljax.core.configuration.applications.ApplicationNames;
+import com.crawljax.core.configuration.applications.ApplicationStartup;
 import org.openqa.selenium.ElementNotVisibleException;
 import org.openqa.selenium.NoSuchElementException;
 import org.slf4j.Logger;
@@ -61,6 +63,8 @@ public class Crawler {
 	private final Provider<InMemoryStateFlowGraph> graphProvider;
 	private final StateVertexFactory vertexFactory;
 
+	private final ApplicationNames applicationName;
+
 	private CrawlPath crawlpath;
 	private StateMachine stateMachine;
 
@@ -85,6 +89,8 @@ public class Crawler {
 		this.waitConditionChecker = waitConditionChecker;
 		this.candidateExtractor = elementExtractor.newExtractor(browser);
 		this.formHandler = formHandlerFactory.newFormHandler(browser);
+
+		this.applicationName = config.getApplicationName();
 	}
 
 	/**
@@ -444,6 +450,18 @@ public class Crawler {
 		}
 
 		browser.goToUrl(url);
+
+		if(!this.applicationName.value().equals(ApplicationNames.NONE.value())){
+			ApplicationStartup applicationStartup = new ApplicationStartup(this.applicationName, this.browser);
+			try {
+				Thread.sleep(2000); // waiting for application to load
+				applicationStartup.start();
+				Thread.sleep(2000); // wait until login is performed
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+
 		plugins.runOnUrlLoadPlugins(context);
 		StateVertex index =
 		        vertexFactory.createIndex(url.toString(), browser.getStrippedDom(),
