@@ -60,7 +60,7 @@ Changes w.r.t the original repository
 -------
 - Fix old dependencies so that it is possible to compile the project;
 - Option to run Crawljax using chrome headless;
-- Login to web applications before starting crawling: possible for 5 applications (see package `com.crawljax.core.configuration.applications`)
+- Login to web applications before starting crawling: possible for 5 applications (see package `com.crawljax.core.configuration.applications`). I noticed that Crawljax has problems with applications where a login is needed. Even if Crawljax has the right credentials to login, it stops some seconds after the login. The reason is still a mistery for me. In order to make it work I modified the Crawljax core in such a way that it starts crawling the application after the login is done; in this way I managed to find a configuration to make Crawljax crawl an application for at least 30 minutes. The login is specific for each application so if I want to test a new application I have to modify the Crawljax core to add the login process for that application.
 
 Installation
 -------
