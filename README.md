@@ -56,6 +56,11 @@ The default driver used for testing uses [PhantomJS](http://phantomjs.org) so ma
 
 Again, make sure a recent version of Firefox is installed on your machine before running the tests.	
 
+Changes w.r.t the original repository
+-------
+- Fix old dependencies so that it is possible to compile the project;
+- Option to run Crawljax using chrome headless;
+- Login to web applications before starting crawling: possible for 5 applications (see package `com.crawljax.core.configuration.applications`)
 
 Installation
 -------
