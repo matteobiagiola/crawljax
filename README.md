@@ -55,3 +55,23 @@ The default driver used for testing uses [PhantomJS](http://phantomjs.org) so ma
 	mvn clean test -P integrationtests -Dtest.browser=FIREFOX
 
 Again, make sure a recent version of Firefox is installed on your machine before running the tests.	
+
+
+Installation
+-------
+
+Once the repository is cloned run `mvn clean install -DskipTests` to install the dependencies. Now the modified version of
+Crawljax can be imported as a maven dependencies in a java project in this way:
+
+```xml
+<dependency>
+    <groupId>com.crawljax</groupId>
+    <artifactId>crawljax-core</artifactId>
+    <version>3.7-SNAPSHOT</version>
+</dependency>
+<dependency>
+    <groupId>com.crawljax.plugins</groupId>
+    <artifactId>crawloverview-plugin</artifactId>
+    <version>3.7-SNAPSHOT</version>
+</dependency>
+```
